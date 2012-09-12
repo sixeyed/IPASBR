@@ -1,0 +1,101 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".config" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Xml.dll" #>
+<#@ assembly name="System.Xml.Linq.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<?xml version="1.0"?>
+<configuration>
+
+  <system.web>
+    <customErrors mode="Off"/>
+    <trust level="Full"/>
+    <compilation debug="true" targetFramework="4.0" />
+  </system.web>
+  
+  <system.serviceModel>
+    <services>
+      <service name="Sixeyed.Ipasbr.Services.FormatService">
+        <!-- Azure Service Bus endpoints -->  
+        <endpoint address="sb://<#= GetNamespace() #>.servicebus.windows.net/net"
+                  binding="netTcpRelayBinding"
+                  contract="Sixeyed.Ipasbr.Services.IFormatService"
+                  behaviorConfiguration="SharedSecret">
+        </endpoint>
+        <!-- local REST endpoint for internal use -->
+        <endpoint address="rest"
+                  binding="webHttpBinding"
+                  behaviorConfiguration="RESTBehavior"
+                  contract="Sixeyed.Ipasbr.Services.IFormatService" />
+      </service>
+    </services>
+    <behaviors>
+        <endpointBehaviors>
+          <behavior name="SharedSecret">
+            <transportClientEndpointBehavior credentialType="SharedSecret">
+              <clientCredentials>
+                <sharedSecret issuerName="<#= GetIdentityName() #>" 
+                              issuerSecret="<#= GetSecretKey() #>"/>
+              </clientCredentials>
+            </transportClientEndpointBehavior>
+          </behavior>
+          <behavior name="RESTBehavior">
+            <webHttp helpEnabled="true"/>
+          </behavior>
+        </endpointBehaviors>
+      <serviceBehaviors>
+        <behavior>
+          <serviceMetadata httpGetEnabled="true"/>
+          <serviceDebug includeExceptionDetailInFaults="true"/>
+        </behavior>
+      </serviceBehaviors>
+    </behaviors>
+    <extensions>
+      <behaviorExtensions>
+        <add name="transportClientEndpointBehavior" type="Microsoft.ServiceBus.Configuration.TransportClientEndpointBehaviorElement, Microsoft.ServiceBus, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+      </behaviorExtensions>
+      <bindingElementExtensions>
+        <add name="tcpRelayTransport" type="Microsoft.ServiceBus.Configuration.TcpRelayTransportElement, Microsoft.ServiceBus, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+      </bindingElementExtensions>
+      <bindingExtensions>
+        <add name="netTcpRelayBinding" type="Microsoft.ServiceBus.Configuration.NetTcpRelayBindingCollectionElement, Microsoft.ServiceBus, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+      </bindingExtensions>
+    </extensions>
+  </system.serviceModel>
+  
+ <system.webServer>
+    <modules runAllManagedModulesForAllRequests="true"/>
+  </system.webServer>
+  
+</configuration>
+
+<#+ 
+	private XDocument _connectionDetails;
+	private XDocument ConnectionDetails
+	{
+		get
+		{ 
+			if (_connectionDetails == null)
+				{
+					_connectionDetails = XDocument.Load(this.Host.ResolvePath(@"..\AzureConnectionDetails.xml"));
+                }
+				return _connectionDetails;
+        }        
+    }
+
+	private string GetNamespace()
+	{
+		return ConnectionDetails.Descendants("azure").First().Attribute("namespace").Value;
+	}
+
+	private string GetIdentityName()
+	{
+		return ConnectionDetails.Descendants("service").First().Attribute("identityName").Value;
+	}
+
+	private string GetSecretKey()
+	{
+	    return ConnectionDetails.Descendants("service").First().Attribute("symmetricKey").Value;
+	}
+#>

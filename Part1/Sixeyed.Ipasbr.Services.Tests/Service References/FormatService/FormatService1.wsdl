@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="com.sixeyed.ipasbr" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FormatService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpRelayBinding_IFormatService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:SslTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <rel:RelaySocketConnection xmlns:rel="http://schemas.microsoft.com/netservices/2009/05/servicebus/connect" />
+        <rel:ListenerRelayCredential wsp:Optional="true" xmlns:rel="http://schemas.microsoft.com/netservices/2009/05/servicebus/connect" />
+        <rel:SenderRelayCredential xmlns:rel="http://schemas.microsoft.com/netservices/2009/05/servicebus/connect" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:import namespace="com.sixeyed.ipasbr" location="http://localhost/Sixeyed.Ipasbr.Services/FormatService.svc?wsdl=wsdl0" />
+  <wsdl:types />
+  <wsdl:binding name="NetTcpRelayBinding_IFormatService" type="i0:IFormatService">
+    <wsp:PolicyReference URI="#NetTcpRelayBinding_IFormatService_policy" />
+    <soap12:binding transport="" />
+    <wsdl:operation name="ReverseString">
+      <soap12:operation soapAction="com.sixeyed.ipasbr/IFormatService/ReverseString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FormatService">
+    <wsdl:port name="NetTcpRelayBinding_IFormatService" binding="tns:NetTcpRelayBinding_IFormatService">
+      <soap12:address location="sb://sixeyed-ipasbr.servicebus.windows.net/net" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
