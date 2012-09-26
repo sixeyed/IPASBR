@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f766d4fe-e7a2-424e-871a-c7a6d71a891a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/Sixeyed.Ipasbr.Services/FormatService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FormatService.xsd" MetadataType="Schema" ID="9446ce2d-8cf3-4ca4-ad6f-42ae6f865c36" SourceId="1" SourceUrl="http://localhost/Sixeyed.Ipasbr.Services/FormatService.svc?xsd=xsd1" />
+    <MetadataFile FileName="FormatService.wsdl" MetadataType="Wsdl" ID="ceaf1e43-12c4-4611-8263-51d7bbc95018" SourceId="1" SourceUrl="http://localhost/Sixeyed.Ipasbr.Services/FormatService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="FormatService1.wsdl" MetadataType="Wsdl" ID="ead111f2-635f-4d45-997e-331e32ce0b62" SourceId="1" SourceUrl="http://localhost/Sixeyed.Ipasbr.Services/FormatService.svc?wsdl" />
+    <MetadataFile FileName="FormatService1.xsd" MetadataType="Schema" ID="a5405a34-d413-4aef-8b65-a14cc9526a46" SourceId="1" SourceUrl="http://localhost/Sixeyed.Ipasbr.Services/FormatService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

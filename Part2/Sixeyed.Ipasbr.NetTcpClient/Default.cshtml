@@ -1,0 +1,36 @@
+﻿@{  
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Consuming on-premise service over Azure using NetTcpRelayBinding";
+
+    var outputString = string.Empty;
+    var inputString = Request["inputString"];
+    
+    //call the service on postback:
+    if (IsPost)
+    {
+        if (!inputString.IsEmpty())
+        {
+            using (var client = new FormatService.FormatServiceClient())
+            {
+                outputString = client.ReverseString(inputString);
+            }
+        }
+    }
+}
+<form method="post" action="">
+    <fieldset>
+        <legend>Reverse a string through Azure Service Bus Relay</legend>
+    <div>
+        <label for="inputString">
+            Input string:</label>
+        <input type="text" id="inputString" name="inputString" title="Input string" value="@inputString" />
+        <input type="submit" value="Go!" title="Go!" />
+    </div>
+    <div>
+        @if (!outputString.IsEmpty())
+        {
+            <label for="outputString">Ouput: @outputString</label>
+        }
+    </div>
+</fieldset>
+</form>

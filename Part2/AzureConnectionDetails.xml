@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- Set your Azure namespace, and the name and symmetric key for the servcie identity here-->
+<!-- TT templates in the projects pull values from here for Azure config in the build -->
+<azure namespace="your service bus namespace">
+  
+  <!-- ACS credentials for the listening service (Part1):-->
+  <service identityName="your service account name here"
+           symmetricKey="your service account key here"/>
+  
+  <!-- ACS credentials for the full trust consumer (Part2): -->
+  <netTcpClient identityName="your consumer account name here"
+                symmetricKey="your consumer account key here"/>
+  
+</azure>
