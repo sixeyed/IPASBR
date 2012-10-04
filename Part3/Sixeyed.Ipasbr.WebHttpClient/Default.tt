@@ -1,0 +1,98 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".cshtml" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Xml.dll" #>
+<#@ assembly name="System.Xml.Linq.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+@{  
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Consuming on-premise service over Azure using WebHttpRelayBinding";
+
+    var outputString = string.Empty;
+    var inputString = Request["inputString"];
+    var rawToken = string.Empty;
+    
+    //call the service on postback:
+    if (IsPost)
+    {
+        if (!inputString.IsEmpty())
+        {
+            //get the SWT token from ACS:
+            var values = new System.Collections.Specialized.NameValueCollection();
+            values.Add("wrap_name", "<#= GetIdentityName() #>"); //service identity name
+            values.Add("wrap_password", "<#= GetSecretKey() #>"); //service identity password
+            values.Add("wrap_scope", "http://<#= GetNamespace() #>.servicebus.windows.net/"); //this is the realm of the RP in ACS
+
+            var acsClient = new WebClient();
+            var responseBytes = acsClient.UploadValues("https://<#= GetNamespace() #>-sb.accesscontrol.windows.net/WRAPv0.9/", "POST", values);
+            rawToken = System.Text.Encoding.UTF8.GetString(responseBytes);
+            //response contains URL-encoded token and a lifespan; parse out the token:
+            var token = HttpUtility.UrlDecode(
+                rawToken
+                .Split('&')
+                .Single(value => value.StartsWith("wrap_access_token=", StringComparison.OrdinalIgnoreCase))
+                .Split('=')[1]);
+            
+            //now call the REST service, adding the token as a header:
+            var client = new WebClient();
+            var headerValue = string.Format("WRAP access_token=\"{0}\"", token);
+            client.Headers.Add("Authorization", headerValue);
+
+            var url = "https://<#= GetNamespace() #>.servicebus.windows.net/rest/reverse?string=" + inputString;
+            outputString = client.DownloadString(url);
+        }
+    }
+}
+<form method="post" action="">
+    <fieldset>
+        <legend>Reverse a string through Azure Service Bus Relay</legend>
+    <div>
+        <label for="inputString">
+            Input string:</label>
+        <input type="text" id="inputString" name="inputString" title="Input string" value="@inputString" />
+        <input type="submit" value="Go!" title="Go!" />
+    </div>
+    <div>
+        @if (!outputString.IsEmpty())
+        {
+            <label for="outputString">Ouput: @outputString</label>
+        }
+    </div>
+    <div>
+        @if (!rawToken.IsEmpty())
+        {
+            <label for="rawToken">Raw SWT token: @rawToken</label>
+        }
+    </div>
+</fieldset>
+</form>
+<#+ 
+	private XDocument _connectionDetails;
+	private XDocument ConnectionDetails
+	{
+		get
+		{ 
+			if (_connectionDetails == null)
+				{
+					_connectionDetails = XDocument.Load(this.Host.ResolvePath(@"..\AzureConnectionDetails.xml"));
+                }
+				return _connectionDetails;
+        }        
+    }
+
+	private string GetNamespace()
+	{
+		return ConnectionDetails.Descendants("azure").First().Attribute("namespace").Value;
+	}
+
+	private string GetIdentityName()
+	{
+		return ConnectionDetails.Descendants("webHttpClient").First().Attribute("identityName").Value;
+	}
+
+	private string GetSecretKey()
+	{
+	    return ConnectionDetails.Descendants("webHttpClient").First().Attribute("password").Value;
+	}
+#>

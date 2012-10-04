@@ -1,0 +1,62 @@
+﻿@{  
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Consuming on-premise service over Azure using WebHttpRelayBinding";
+
+    var outputString = string.Empty;
+    var inputString = Request["inputString"];
+    var rawToken = string.Empty;
+    
+    //call the service on postback:
+    if (IsPost)
+    {
+        if (!inputString.IsEmpty())
+        {
+            //get the SWT token from ACS:
+            var values = new System.Collections.Specialized.NameValueCollection();
+            values.Add("wrap_name", "partialTrustConsumer"); //service identity name
+            values.Add("wrap_password", "[partialTrustConsumer password]"); //service identity password
+            values.Add("wrap_scope", "http://[your Service Bus namespace].servicebus.windows.net/"); //this is the realm of the RP in ACS
+
+            var acsClient = new WebClient();
+            var responseBytes = acsClient.UploadValues("https://[your Service Bus namespace]-sb.accesscontrol.windows.net/WRAPv0.9/", "POST", values);
+            rawToken = System.Text.Encoding.UTF8.GetString(responseBytes);
+            //response contains URL-encoded token and a lifespan; parse out the token:
+            var token = HttpUtility.UrlDecode(
+                rawToken
+                .Split('&')
+                .Single(value => value.StartsWith("wrap_access_token=", StringComparison.OrdinalIgnoreCase))
+                .Split('=')[1]);
+            
+            //now call the REST service, adding the token as a header:
+            var client = new WebClient();
+            var headerValue = string.Format("WRAP access_token=\"{0}\"", token);
+            client.Headers.Add("Authorization", headerValue);
+
+            var url = "https://[your Service Bus namespace].servicebus.windows.net/rest/reverse?string=" + inputString;
+            outputString = client.DownloadString(url);
+        }
+    }
+}
+<form method="post" action="">
+    <fieldset>
+        <legend>Reverse a string through Azure Service Bus Relay</legend>
+    <div>
+        <label for="inputString">
+            Input string:</label>
+        <input type="text" id="inputString" name="inputString" title="Input string" value="@inputString" />
+        <input type="submit" value="Go!" title="Go!" />
+    </div>
+    <div>
+        @if (!outputString.IsEmpty())
+        {
+            <label for="outputString">Ouput: @outputString</label>
+        }
+    </div>
+    <div>
+        @if (!rawToken.IsEmpty())
+        {
+            <label for="rawToken">Raw SWT token: @rawToken</label>
+        }
+    </div>
+</fieldset>
+</form>

@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{B7E0C7AC-B2F8-4E21-BB8B-C41ACA11700A}"
+	ProjectSection(SolutionItems) = preProject
+		References\Microsoft.ServiceBus.dll = References\Microsoft.ServiceBus.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9DFF72E1-5821-4F21-96B4-84F5FA61858C}"
+	ProjectSection(SolutionItems) = preProject
+		AzureConnectionDetails.xml = AzureConnectionDetails.xml
+		Local.testsettings = Local.testsettings
+		Sixeyed.Ipasbr.vsmdi = Sixeyed.Ipasbr.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sixeyed.Ipasbr.Services", "Sixeyed.Ipasbr.Services\Sixeyed.Ipasbr.Services.csproj", "{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sixeyed.Ipasbr.Services.Tests", "Sixeyed.Ipasbr.Services.Tests\Sixeyed.Ipasbr.Services.Tests.csproj", "{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1} = {E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Sixeyed.Ipasbr.WebHttpClient", "Sixeyed.Ipasbr.WebHttpClient", "{7F1EE47E-1480-47CD-A001-69B72077B592}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/Sixeyed.Ipasbr.WebHttpClient"
+		Debug.AspNetCompiler.PhysicalPath = "Sixeyed.Ipasbr.WebHttpClient\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Sixeyed.Ipasbr.WebHttpClient\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Sixeyed.Ipasbr.WebHttpClient"
+		Release.AspNetCompiler.PhysicalPath = "Sixeyed.Ipasbr.WebHttpClient\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Sixeyed.Ipasbr.WebHttpClient\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2028"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsbasic01.tfsmadeeasy.com/tfs/sixeyedcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Sixeyed.Ipasbr.Services.Tests\\Sixeyed.Ipasbr.Services.Tests.csproj
+		SccProjectName1 = Sixeyed.Ipasbr.Services.Tests
+		SccLocalPath1 = Sixeyed.Ipasbr.Services.Tests
+		SccProjectUniqueName2 = Sixeyed.Ipasbr.Services\\Sixeyed.Ipasbr.Services.csproj
+		SccProjectName2 = Sixeyed.Ipasbr.Services
+		SccLocalPath2 = Sixeyed.Ipasbr.Services
+		SccWebProject3 = true
+		SccProjectUniqueName3 = Sixeyed.Ipasbr.WebHttpClient
+		SccProjectName3 = Sixeyed.Ipasbr.WebHttpClient
+		SccLocalPath3 = Sixeyed.Ipasbr.WebHttpClient
+		SccProjectEnlistmentChoice3 = 2
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Sixeyed.Ipasbr.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F1EE47E-1480-47CD-A001-69B72077B592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F1EE47E-1480-47CD-A001-69B72077B592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F1EE47E-1480-47CD-A001-69B72077B592}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F1EE47E-1480-47CD-A001-69B72077B592}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

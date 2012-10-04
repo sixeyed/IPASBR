@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- Set your Azure namespace, and the name and symmetric key for the servcie identity here-->
+<!-- TT templates in the projects pull values from here for Azure config in the build -->
+<azure namespace="[your Service Bus namespace]">
+
+  <!-- ACS credentials for the listening service (Part1):-->
+  <service identityName="serviceProvider "
+           symmetricKey="[serviceProvider symmetric key]"/>
+  
+  <!-- ACS credentials for the partial-trust consumer (Part3): -->
+  <webHttpClient identityName="partialTrustConsumer"
+                 password="[partialTrustConsumer password]"/>
+  
+</azure>
