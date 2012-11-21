@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sixeyed.Ipasbr.Services", "Sixeyed.Ipasbr.Services\Sixeyed.Ipasbr.Services.csproj", "{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sixeyed.Ipasbr.Services.Tests", "Sixeyed.Ipasbr.Services.Tests\Sixeyed.Ipasbr.Services.Tests.csproj", "{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1} = {E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9DFF72E1-5821-4F21-96B4-84F5FA61858C}"
+	ProjectSection(SolutionItems) = preProject
+		AzureConnectionDetails.xml = AzureConnectionDetails.xml
+		Local.testsettings = Local.testsettings
+		Sixeyed.Ipasbr.vsmdi = Sixeyed.Ipasbr.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Sixeyed.Ipasbr.NodeJsClient", "Sixeyed.Ipasbr.NodeJsClient", "{169C666E-7DC0-44DB-8D1F-3B41A53AE44A}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/Sixeyed.Ipasbr.NodeJsClient"
+		Debug.AspNetCompiler.PhysicalPath = "Sixeyed.Ipasbr.NodeJsClient\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Sixeyed.Ipasbr.NodeJsClient\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Sixeyed.Ipasbr.NodeJsClient"
+		Release.AspNetCompiler.PhysicalPath = "Sixeyed.Ipasbr.NodeJsClient\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Sixeyed.Ipasbr.NodeJsClient\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "45873"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{1AAE9B15-2534-40CB-822F-369CB98DBBFA}"
+	ProjectSection(SolutionItems) = preProject
+		References\Microsoft.ServiceBus.dll = References\Microsoft.ServiceBus.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsbasic01.tfsmadeeasy.com/tfs/sixeyedcollection
+		SccProjectUniqueName0 = Sixeyed.Ipasbr.Services\\Sixeyed.Ipasbr.Services.csproj
+		SccProjectName0 = Sixeyed.Ipasbr.Services
+		SccLocalPath0 = Sixeyed.Ipasbr.Services
+		SccWebProject1 = true
+		SccProjectUniqueName1 = Sixeyed.Ipasbr.NodeJsClient
+		SccProjectName1 = Sixeyed.Ipasbr.NodeJsClient
+		SccLocalPath1 = Sixeyed.Ipasbr.NodeJsClient
+		SccProjectEnlistmentChoice1 = 2
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = Sixeyed.Ipasbr.Services.Tests\\Sixeyed.Ipasbr.Services.Tests.csproj
+		SccProjectName3 = Sixeyed.Ipasbr.Services.Tests
+		SccLocalPath3 = Sixeyed.Ipasbr.Services.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Sixeyed.Ipasbr.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03AA22C-36F2-4573-A8A4-6F0B76DA00A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0E0135-B8BB-4CCD-AD8F-A0062FEFF425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{169C666E-7DC0-44DB-8D1F-3B41A53AE44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169C666E-7DC0-44DB-8D1F-3B41A53AE44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169C666E-7DC0-44DB-8D1F-3B41A53AE44A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{169C666E-7DC0-44DB-8D1F-3B41A53AE44A}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

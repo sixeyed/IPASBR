@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Sixeyed.Ipasbr.Services.FormatService" CodeBehind="FormatService.svc.cs" %>

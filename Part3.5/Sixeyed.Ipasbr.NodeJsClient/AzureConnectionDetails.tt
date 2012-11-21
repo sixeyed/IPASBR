@@ -1,0 +1,49 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".js" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Xml.dll" #>
+<#@ assembly name="System.Xml.Linq.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+
+exports.namespace = function namespace(){
+	return '<#= GetNamespace() #>';
+};
+
+exports.issuerName = function issuerName() {
+	return '<#= GetIdentityName() #>';
+}
+
+exports.issuerSecret = function issuerSecret() {
+	return '<#= GetSecretKey() #>';
+}
+
+<#+ 
+	private XDocument _connectionDetails;
+	private XDocument ConnectionDetails
+	{
+		get
+		{ 
+			if (_connectionDetails == null)
+				{
+					_connectionDetails = XDocument.Load(this.Host.ResolvePath(@"..\AzureConnectionDetails.xml"));
+                }
+				return _connectionDetails;
+        }        
+    }
+
+	private string GetNamespace()
+	{
+		return ConnectionDetails.Descendants("azure").First().Attribute("namespace").Value;
+	}
+
+	private string GetIdentityName()
+	{
+		return ConnectionDetails.Descendants("webHttpClient").First().Attribute("identityName").Value;
+	}
+
+	private string GetSecretKey()
+	{
+	    return ConnectionDetails.Descendants("webHttpClient").First().Attribute("password").Value;
+	}
+#>
